@@ -3,11 +3,11 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <header className='w-full'>
+    <header className='w-full sticky'>
 
       <div className='flex items-center flex-grow bg-amazon_blue  p-1'>
         <div className='flex mt-2 mr-2 flex-grow items-center sm:flex-grow-0'>
-          <img src="/img/logo.png" alt="amazon logo" width="150" height="40" className='cursor-pointer' />
+          <a href='/'><img src="/img/logo.png" alt="amazon logo" width="150" height="40" className='cursor-pointer' /></a>
         </div>
         <div className='hidden sm:flex items-center rounded-md h-10 flex-grow bg-yellow-400 hover:bg-yellow-500 hover:cursor-pointer focus:outline-orange-400'>
 

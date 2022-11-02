@@ -4,7 +4,9 @@
 
 
 @layer components{
-    .link{
-      @apply cursor-pointer hover:border-2 hover:border-white p-1 rounded-md;
+    .link {
+      @apply cursor-pointer hover:border hover:border-white hover:p-1 hover:rounded-md;
     }
-}
+
+    
+  }
