@@ -4,7 +4,6 @@ const MyImage = ({ images = [{ url: "" }] }) => {
 
     const [mainImage, setMainImage] = useState(images[0]);
 
-    console.log(images);
 
     return (
         <div className='grid grid-cols-4 gap-8 sm:flex-col sm:order-1 sm:grid-cols-2'>

@@ -3,19 +3,33 @@ import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import { BiStar } from 'react-icons/bi'
 import { useContext } from "react";
 import { Store } from "../../Store";
+import axios from "axios";
 
 
 
 const Product = (currElem) => {
 
-    const { slug, price, category, image, rating } = currElem;
+    const { _id,slug, price, category, image, rating,inStock } = currElem;
 
     const { state, dispatch: ctxDispatch } = useContext(Store);
 
-    const AddCartHandller = () => {
+    const {
+        cart: { cartItems },
+    } = state;
+
+    const AddCartHandller = async (item) => {
+        const existItem = cartItems.find((x) => x._id === _id);
+        const quantity = existItem ? existItem.quantity + 1 : 1;
+
+        const { data } = await axios.get(`/api/products/${item._id}`);
+
+        if (data.inStock < quantity) {
+            window.alert('Sorry. Product is out of stock');
+            return;
+        }
         ctxDispatch({
             type: 'CART_ADD_ITEM',
-            payload: { ...currElem, quantity: 1 }
+            payload: { ...item, quantity }
         })
     }
 
@@ -46,7 +60,13 @@ const Product = (currElem) => {
                 </span>
             </div>
             <p className="mt-4 mb-3">₹{parseFloat(price).toFixed(2)}</p>
-            <button className="mt-auto w-48 p-2 border border-yellow-500 text-sm md:text-sm bg-gradient-to-b from-yellow-200 to-yellow-400 focus:ring-2 focus:ring-yellow-500 active:from-yellow-400 rounded-sm" onClick={AddCartHandller}>Add To Cart</button>
+            <div>
+                {inStock === 0 ? (
+                    <button disabled className="button_disabled">Out of Stock</button>
+                ):(
+                    <button onClick={() => AddCartHandller(currElem) } className="button">Add to Cart</button>
+                )}
+            </div>
 
         </div>
     )

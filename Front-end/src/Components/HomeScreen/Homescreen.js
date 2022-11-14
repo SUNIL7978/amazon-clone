@@ -39,7 +39,6 @@ const Homescreen = () => {
                 dispatch({ type: 'FETCH_FAIL', payload: err.message });
             }
 
-            // setProducts(result.data);
         };
         fetchData();
     }, []);
