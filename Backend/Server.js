@@ -1,5 +1,16 @@
 import express from "express";
 import data from "./data.js";
+import mangoose from 'mongoose'
+import dotenv from 'dotenv'
+
+
+dotenv.config();
+
+mangoose.connect(process.env.MANGODB_URI).then(()=>{
+  console.log('Connected to db')
+}).catch((err)=>{
+  console.log(err.message);
+})
 
 
 
