@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react'
-import {  NavLink, useNavigate, useParams } from 'react-router-dom'
-import Header from '../Header/Header';
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import Star from './Star';
 import { TbTruckDelivery, TbReplace } from 'react-icons/tb'
 import { MdSecurity } from 'react-icons/md'
@@ -9,6 +8,8 @@ import MyImage from './MyImage';
 import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { Store } from '../../Store';
+import Header from '../Header/Header';
+import Footer from '../HomeScreen/Footer';
 
 
 const reducer = (state, action) => {
@@ -30,7 +31,7 @@ const ProductDetail = () => {
     const navigate = useNavigate();
     const params = useParams();
     const { slug } = params;
-   
+
 
     const [{ loading, error, product }, dispatch] = useReducer((reducer), {
         product: [],
@@ -50,8 +51,6 @@ const ProductDetail = () => {
             } catch (err) {
                 dispatch({ type: 'FETCH_FAIL', payload: err.message });
             }
-
-            // setProducts(result.data);
         };
         fetchData();
     }, [slug]);
@@ -84,7 +83,7 @@ const ProductDetail = () => {
         <div className='sm:px-1 sm:py-0'>
             <Header />
             <div className='h-16 flex justify-start items-center text-base pl-5'>
-                <NavLink to="/" className='font-bold'>Home</NavLink>
+                <NavLink to="/" className='font-bold text-decoration-none text-black'>Home</NavLink>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
                     <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
                 </svg>
@@ -154,7 +153,7 @@ const ProductDetail = () => {
                                 </p>
 
                             </div>
-                               
+
                             <div>
                                 {product.inStock > 0 && (
                                     <span className='flex mt-4 gap-3'>
@@ -166,10 +165,12 @@ const ProductDetail = () => {
                         </div>
 
                     </div>
+                    
                 </div>
             )
             }
 
+                <Footer/>
         </div>
     )
 }

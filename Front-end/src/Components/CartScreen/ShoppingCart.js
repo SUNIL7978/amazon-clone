@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../../Store';
-import Header from '../Header/Header'
+import Header from '../Header/Header';
+import Footer from '../HomeScreen/Footer';
 import CheckOutProduct from './CheckOutProduct';
 
 const ShoppingCart = () => {
@@ -15,16 +16,14 @@ const ShoppingCart = () => {
 
     const checkoutHandler = () => {
         navigate('/signin?redirect=/shipping');
-      };
+    };
 
     return (
         <div className='bg-gray-100'>
             <Helmet>
                 <title>Cart Shopping</title>
             </Helmet>
-
             <Header />
-
             <main className='lg:flex max-w-screen-2xl mx-auto'>
                 <div className='flex-grow m-5 shadow-sm'>
                     <div className='flex flex-col p-5 space-y-5 bg-white'>
@@ -32,7 +31,7 @@ const ShoppingCart = () => {
                         <div>
                             {cartItems.length === 0 ?
                                 (<span className='bg-red-300 block border border-black p-3 font-bold text-center text-2xl rounded-md'>
-                                    Cart is Empty : <Link to="/">Go To Shopping</Link>
+                                    Cart is Empty : <Link to="/" className='text-decoration-none text-black'>Go To Shopping</Link>
                                 </span>
                                 )
                                 :
@@ -50,15 +49,15 @@ const ShoppingCart = () => {
 
                 <div className='flex flex-col bg-white p-10 shadow-md'>
                     <h3 className='whitespace-nowrap'>
-                       <span className='text-lg font-bold'> Subtotal </span><span className='text-lg font-bold'>({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                        items)</span> : ₹
-                            <span className='text-lg font-bold'> {parseFloat(cartItems.reduce((a, c) => a + c.price * c.quantity, 0)).toFixed(2)}</span>
+                        <span className='text-lg font-bold'> Subtotal </span><span className='text-lg font-bold'>({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
+                            items)</span> : <span className='text-sm'>₹</span>
+                        <span className='text-lg font-bold'> {parseFloat(cartItems.reduce((a, c) => a + c.price * c.quantity, 0)).toFixed(2)}</span>
                     </h3>
                     <button disabled={cartItems.length === 0} className="mt-4 button" onClick={checkoutHandler}>Proceed To Checkout</button>
                 </div>
 
             </main>
-
+            <Footer />
         </div>
     )
 }

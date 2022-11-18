@@ -16,6 +16,7 @@ const MyImage = ({ images = [{ url: "" }] }) => {
                                     key={index}
                                     className="w-16 h-auto bg-cover object-contain cursor-pointer border border-black p-3 rounded-md"
                                     onClick={() => setMainImage(currimg)}
+
                                 />
                             </figure>
                         )
@@ -24,7 +25,7 @@ const MyImage = ({ images = [{ url: "" }] }) => {
             </div>
 
             <div className='flex items-center order-1'>
-                <img src={mainImage.url} alt={mainImage.filename} style={{width:"100%", height:"100%"}}/>
+                <img src={mainImage.url} alt={mainImage.filename}  style={{ width: "100%", height: "50vh" }}/>
             </div>
 
         </div>

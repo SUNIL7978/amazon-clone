@@ -1,65 +1,93 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import Axios from 'axios'
+import { Store } from '../../Store'
+import { toast } from 'react-toastify'
 
 const SignInPage = () => {
-    const { search } = useLocation();
-    const redirectInUrl = new URLSearchParams(search).get('redirect');
-    const redirect = redirectInUrl ? redirectInUrl : '/';
-    return (
-        <div className='min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
-            <div className='max-w-md w-full space-y-8'>
-                <Helmet>
-                    <title>Login Page</title>
-                </Helmet>
-                <div className='mt-32'>
-                    <div className='flex justify-center'>
-                        <img alt="" className="h-14 w-14" src="https://ik.imagekit.io/pibjyepn7p9/Lilac_Navy_Simple_Line_Business_Logo_CGktk8RHK.png?ik-sdk-version=javascript-1.4.3&updatedAt=1649962071315" />
-                    </div>
-                    <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>Login to your account</h2>
-                    <p className='mt-2 text-center text-lg text-gray-600 '>
-                        Don't have an account yet?
-                        <Link to={`/signup?redirect=${redirect}`} className="font-medium text-purple-600 hover:text-purple-500 m-2">SignUp</Link>
-                    </p>
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
 
-                    <form action="" className='mt-8 space-y-6'>
-                        <div className='space-y-5'>
-                            <div className='my-5'>
-                                <label htmlFor="email-address" className='sr-only'>Email address </label>
-                                <input type="email" placeholder='Email address' id='email-address' name='email' required autoComplete='email' className='fixedInputClass' /><br></br>
-                                <label htmlFor="password" className='sr-only'>Password </label>
-                                <input type="email" placeholder='Password' id='password' name='password' required autoComplete='current-password' className='fixedInputClass' />
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-                            </div>
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { userInfo } = state;
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await Axios.post('/api/users/signin', {
+        email,
+        password,
+      });
+      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      navigate(redirect || '/');
+    } catch (err) {
+      toast.error('invalid email and password');
+    }
+  };
 
-                        </div>
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
-                    </form>
+  const showPassword = () => {
+    let x = document.getElementById("password")
+    if (x.type === "password") {
+      x.type = "text"
+    } else {
+      x.type = "password"
+    }
 
-                    <div className="flex items-center justify-between ">
-                        <div className="flex items-center">
-                            <input
-                                id="remember-me"
-                                name="remember-me"
-                                type="checkbox"
-                                className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
-                            />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                Remember me
-                            </label>
-                        </div>
+  }
 
-                        <div className="text-sm">
-                            <Link href="\" className="font-medium text-purple-600 hover:text-purple-500">
-                                Forgot your password?
-                            </Link>
-                        </div>
-                    </div>
-                    <button className="LoginButton">Login</button>
+
+  return (
+    <div className='min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-md w-full space-y-8'>
+        <Helmet>
+          <title>Amazona Sign in</title>
+        </Helmet>
+
+        <div className='-mt-10'>
+          <div className='flex justify-center'>
+            <Link to="/"><img alt="" className="h-32 w-32 cursor-pointer" src="/img/logo2.png" /></Link>
+          </div>
+          <div className='border-2 border-gray p-4 -mt-8'>
+            <h2 className='text-center text-3xl font-extrabold text-gray-900'>Login to your account</h2>
+            <form onSubmit={submitHandler} className='mt-8 space-y-6'>
+              <div className='space-y-5'>
+                <div className='my-5'>
+                  <label htmlFor="email-address" className='sr-only'>Email address </label>
+                  <input type="email" placeholder='Enter Your Email' id='email-address' name='email' required autoComplete='email' className='fixedInputClass' onChange={(e) => setEmail(e.target.value)} /><br></br>
+                  <label htmlFor="password" className='sr-only'>Password </label>
+                  <input type="password" placeholder='Enter your Password' id='password' name='password' required autoComplete='current-password' className='fixedInputClass' onChange={(e) => setPassword(e.target.value)} /><br />
+                  <input type="checkbox" onClick={showPassword} /> Show Password
+                  <button className="LoginButton" type="submit">Login</button>
                 </div>
+
+              </div>
+
+            </form>
+          </div>
+
+          <div className='mt-2 text-center text-lg text-gray-600 flex flex-col'>
+              <span>New Account Amazona</span>
+              <Link to={`/signup?redirect=${redirect}`} className=" text-black m-4 text-center"><button type='submit' className='w-full border border-black bg-amber-50 p-1 rounded-md hover:bg-yellow-300'>Create your Account</button></Link>
             </div>
+
+
+
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default SignInPage

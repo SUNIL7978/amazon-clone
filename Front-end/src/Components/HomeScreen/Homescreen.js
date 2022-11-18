@@ -2,11 +2,11 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useReducer } from 'react';
 import logger from 'logger-for-use-reducer';
-import Header from '../Header/Header';
 import Banner from './Banner';
 import ProductFeed from './ProductFeed'
-import Footer from './Footer';
 import { Helmet } from 'react-helmet-async';
+import Header from '../Header/Header';
+import Footer from './Footer';
 
 
 const reducer = (state, action) => {
@@ -47,6 +47,7 @@ const Homescreen = () => {
         <Helmet>
             <title>Amazon</title>
         </Helmet>
+      
             <Header/>
 
             <main className='max-w-screen-2xl mx-auto'>
@@ -63,10 +64,7 @@ const Homescreen = () => {
                 
             </main>
 
-            <div className='w-full'>
-                    <Footer/>
-                </div>
-
+                <Footer/>
         </div>
     )
 }

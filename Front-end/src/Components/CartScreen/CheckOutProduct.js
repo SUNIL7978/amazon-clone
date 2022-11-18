@@ -34,7 +34,7 @@ const CheckOutProduct = ({item}) => {
             <img src={item.image} alt={item.slug} style={{ width: "100%", height: "20vh" }} />
 
             <div className='col-span-3 mx-5'>
-                <span className='text-2xl'> <Link to={`/product/${item.slug}`}>{item.title}</Link></span>
+                <span className='text-2xl'> <Link to={`/product/${item.slug}`} className="text-decoration-none text-black">{item.title}</Link></span>
                 <div className='flex space-x-3 mt-5'>
                     <button disabled={item.quantity === 0} className="text-2xl" onClick={() =>
                           updateItemHandler(item, item.quantity - 1)

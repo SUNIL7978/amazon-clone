@@ -38,7 +38,7 @@ const Product = (currElem) => {
     return (
         <div className='relative flex items-center justify-center flex-col z-30 p-3 m-3 bg-white' key={slug}>
             <p className='absolute top-2 right-2 text-xs italic text-gray-400'>{category}</p>
-            <Link to={`/product/${slug}`} className='cursor-pointer font-bold text-center mt-8 flex items-center flex-col'>
+            <Link to={`/product/${slug}`} className='cursor-pointer font-bold text-center mt-8 flex items-center flex-col text-decoration-none text-black'>
                 <span className="cursor-pointer"><img src={image} alt="Pics not found" style={{ width: "100%", height: "20vh" }} /></span>
                 <div className="mt-16 flex items-center">{slug}</div>
             </Link>
