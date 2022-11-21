@@ -3,43 +3,43 @@ import { Helmet } from 'react-helmet-async'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
-import Header from '../Header/Header'
 import Footer from '../HomeScreen/Footer'
-import '../ShippingScreen/shippingScreen.css'
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../../Store';
 import { useEffect } from 'react';
 import CheckoutStep from './CheckoutStep';
+import CheckOutHeader from '../Header/CheckOutHeader';
 
 const ShippingScreenAddress = () => {
 
     const navigate = useNavigate();
     const { state, dispatch: ctxDispatch } = useContext(Store);
 
-    const { userInfo, cart:{ shippingAddress}} = state
+    const { userInfo, cart: { shippingAddress } } = state
 
     const [fullName, setFullName] = useState(shippingAddress.fullName || "");
     const [address, setAdrress] = useState(shippingAddress.address || "");
     const [city, setCity] = useState(shippingAddress.city || "");
     const [pincode, setPincode] = useState(shippingAddress.pincode || "");
     const [country, setCountry] = useState(shippingAddress.country || "");
+    const [mobileNumber, setMobileNumber] = useState(shippingAddress.mobileNumber || "");
 
-    useEffect(() =>{
-        if(!userInfo){
+    useEffect(() => {
+        if (!userInfo) {
             navigate('/signin?redirect=/shipping')
         }
-    },[userInfo,navigate])
+    }, [userInfo, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         ctxDispatch({
-            type:"SAVE_SHIPPING_ADDRESS",
-            payload:{
-                fullName,address,city,pincode,country
+            type: "SAVE_SHIPPING_ADDRESS",
+            payload: {
+                fullName, address, city, pincode, country,mobileNumber
             }
         })
-        localStorage.setItem('shippingAddress', JSON.stringify({fullName,address,city,pincode,country}))
+        localStorage.setItem('shippingAddress', JSON.stringify({ fullName, address, city, pincode, country,mobileNumber }))
         navigate("/payment")
     }
     return (
@@ -47,9 +47,9 @@ const ShippingScreenAddress = () => {
             <Helmet>
                 <title>Shipping Address</title>
             </Helmet>
-                <Header/>
+            <CheckOutHeader/>
             <div className='mt-8 container small-container'>
-            <CheckoutStep step1 step2></CheckoutStep>
+                <CheckoutStep step1 step2></CheckoutStep>
             </div>
             <div className='container small-container'>
                 <h1 className='my-7'>Shipping Address</h1>
@@ -80,7 +80,7 @@ const ShippingScreenAddress = () => {
                         />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="fullName">
-                        <Form.Label>Pin-Code</Form.Label>
+                        <Form.Label>PinCode</Form.Label>
                         <Form.Control
                             value={pincode}
                             onChange={(e) => setPincode(e.target.value)}
@@ -95,6 +95,15 @@ const ShippingScreenAddress = () => {
                             required
                         />
                     </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="fullName">
+                        <Form.Label>Mobile Number</Form.Label>
+                        <Form.Control
+                            value={mobileNumber}
+                            onChange={(e) => setMobileNumber(e.target.value)}
+                            required
+                        />
+                    </Form.Group>
                     <div className='mb-3'>
                         <Button variant="primary" type="submit">
                             Continue
@@ -102,7 +111,7 @@ const ShippingScreenAddress = () => {
                     </div>
                 </Form>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

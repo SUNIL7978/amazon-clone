@@ -3,34 +3,52 @@
 @tailwind utilities;
 
 
-@layer components{
-    .link {
-      @apply cursor-pointer hover:border hover:border-white hover:p-1 hover:rounded-md;
-    }
-
-    .button{
-      @apply mt-auto w-48 p-2 border border-yellow-500 text-sm md:text-sm bg-gradient-to-b from-yellow-200 to-yellow-400 focus:ring-2 focus:ring-yellow-500 active:from-yellow-400 rounded-2xl
-    }
-
-    .button_disabled{
-      @apply from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed;
-    }
-
-    .fixedInputClass{
-      @apply rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm;
-    }
-
-    .LoginButton {
-      @apply relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black mt-10
-    }
-
+@layer components {
+  .link{
+    @apply cursor-pointer hover:border focus:border-white
+  }
+  .button {
+    @apply mt-auto w-48 p-2 border border-yellow-500 text-sm md:text-sm bg-gradient-to-b from-yellow-200 to-yellow-400 focus:ring-2 focus:ring-yellow-500 active:from-yellow-400 rounded-2xl
   }
 
-  .checkout-steps > div {
-    border-bottom: 0.2rem solid #a0a0a0;
-    color: #a0a0a0;
+  .button_disabled {
+    @apply from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed;
   }
-  .checkout-steps > div.active {
-    border-bottom: 0.2rem solid #f08000;
-    color: #f08000;
+
+  .fixedInputClass {
+    @apply rounded-md appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm;
   }
+
+  .LoginButton {
+    @apply relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black mt-10
+  }
+
+}
+
+
+
+
+
+.small-container {
+  max-width: 600px;
+}
+
+.header_checkout {
+  border-color: #DDD !important;
+  border-style: solid !important;
+  border-width: 0 0 1px 0 !important;
+  background-image: url(https://images-na.ssl-images-amazon.com/images/G/31/common/sprites/tspc-header-bkg.png);
+  height: 60px;
+  background-position-y: -13px;
+}
+
+
+.checkout-steps>div {
+  border-bottom: 0.2rem solid #a0a0a0;
+  color: #a0a0a0;
+}
+
+.checkout-steps>div.active {
+  border-bottom: 0.2rem solid #f08000;
+  color: #f08000;
+}

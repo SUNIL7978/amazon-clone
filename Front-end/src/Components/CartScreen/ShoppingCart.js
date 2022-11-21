@@ -10,7 +10,7 @@ const ShoppingCart = () => {
 
     const navigate = useNavigate();
 
-    const { state, dispatch: ctxDispatch } = useContext(Store);
+    const { state} = useContext(Store); //, dispatch: ctxDispatch 
 
     const { cart: { cartItems } } = state;
 
@@ -50,10 +50,10 @@ const ShoppingCart = () => {
                 <div className='flex flex-col bg-white p-10 shadow-md'>
                     <h3 className='whitespace-nowrap'>
                         <span className='text-lg font-bold'> Subtotal </span><span className='text-lg font-bold'>({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                            items)</span> : <span className='text-sm'>₹</span>
-                        <span className='text-lg font-bold'> {parseFloat(cartItems.reduce((a, c) => a + c.price * c.quantity, 0)).toFixed(2)}</span>
+                            items)</span> : $
+                        <span className='text-lg font-bold'> {(cartItems.reduce((a, c) => a + c.price * c.quantity, 0)).toFixed(2)}</span>
                     </h3>
-                    <button disabled={cartItems.length === 0} className="mt-4 button" onClick={checkoutHandler}>Proceed To Checkout</button>
+                    <button disabled={cartItems.length === 0} className="mt-4 button" onClick={checkoutHandler}>Proceed To Buy</button>
                 </div>
 
             </main>

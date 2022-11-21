@@ -59,7 +59,7 @@ const Product = (currElem) => {
                     {rating.rate >= 5 ? <BsStarFill /> : rating.rate >= 4.5 ? <BsStarHalf /> : <BiStar />}
                 </span>
             </div>
-            <p className="mt-4 mb-3">₹{parseFloat(price).toFixed(2)}</p>
+            <p className="mt-4 mb-3">${(price).toFixed(2)}</p>
             <div>
                 {inStock === 0 ? (
                     <button disabled className="button_disabled">Out of Stock</button>

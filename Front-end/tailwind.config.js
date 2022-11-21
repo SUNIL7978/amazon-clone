@@ -8,6 +8,7 @@ module.exports = {
       colors:{
         amazon_blue:{
             light:"#232f3e",
+            light_white: "hsl(135, 0%, 95%)",
             DEFAULT:"#131921",
         },
 

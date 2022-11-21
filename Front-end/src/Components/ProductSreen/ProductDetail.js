@@ -108,13 +108,13 @@ const ProductDetail = () => {
                             <p className='font-bold border-t-2 border-black w-full'>
                                 <span className='mt-8'> MRP :
                                     <del>
-                                        ₹{parseFloat(product.price + 2500).toFixed(2)}
+                                       ${(product.price).toFixed(2)}
                                     </del>
                                 </span>
                             </p>
 
                             <p className='font-bold '>
-                                <span className='text-violet-700'>Deal of the Day : </span> <span>₹{parseFloat(product.price).toFixed(2)}</span>
+                                <span className='text-violet-700'>Deal of the Day : </span> <span>${product.price}</span>
                             </p>
 
                             <p className='leading-4 mb-8'>

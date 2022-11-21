@@ -48,7 +48,7 @@ const CheckOutProduct = ({item}) => {
                         <TbCirclePlus />
                     </button>
                 </div>
-                <div className='text-lg mt-5 '> <span className='text-purple-400'>Price :</span> ₹{parseFloat(item.price).toFixed(2)}</div>
+                <div className='text-lg mt-5 '> <span className='text-purple-400'>Price :</span>${(item.price).toFixed(2)} </div>
             </div>
             
             <div className='flex flex-col justify-self-end my-auto space-y-2'>

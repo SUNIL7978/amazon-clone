@@ -9,6 +9,9 @@ import SignInPage from './components/SigninScreen/SignInPage';
 import ShippingScreenAddress from './components/ShippingScreen/ShippingScreenAddress';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SignUpPage from './components/SigninScreen/SignUpPage';
+import PaymentMethodScreen from './components/PaymentScreen/PaymentMethodScreen';
+import PlaceOrderScreen from './components/PlaceOrderScreen/PlaceOrderScreen';
+import OrderScreen from './components/OrderScreen/OrderScreen';
 
 function App() {
 
@@ -21,6 +24,9 @@ function App() {
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/shipping" element={<ShippingScreenAddress />} />
+          <Route path='/placeorder' element={<PlaceOrderScreen/>}/>
+          <Route path="/order/:id" element={<OrderScreen />}></Route>
+          <Route path="/payment" element={<PaymentMethodScreen/>}/>
           <Route path="/signup" element={<SignUpPage/>}/>
           <Route path="/" element={<Homescreen />} />
         </Routes>
